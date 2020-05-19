@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const routes = require("./services/routes/service")
+const routes = require("./services/routes/services_routes")
 
 const connectDB = require('./services/config/connectDB')
 
