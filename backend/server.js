@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const routes = require("./services/routes/service")
+const routes = require("./routes/services_routes")
 
-const connectDB = require('./services/config/connectDB')
+const connectDB = require('./config/connectDB')
 
 app.use(express.json())
 app.use(cors())
