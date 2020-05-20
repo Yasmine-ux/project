@@ -1,0 +1,12 @@
+.footer {
+    background-color: #484848;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.rights {
+    display: flex;
+    justify-content: center;
+}
+.row {
+    padding-top: 30px;
+}

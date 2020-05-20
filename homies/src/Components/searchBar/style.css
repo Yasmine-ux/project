@@ -1,0 +1,23 @@
+input {
+    border: transparent;
+    height: 50px;
+    width: 400px;
+    border-radius: 5px;
+}
+::placeholder {
+    padding: 30px;
+}
+button {
+    height: 50px;
+    border: transparent;
+    width: 120px;
+    background-color: #2c3792;
+    border-radius: 15px;
+    color: white;
+}
+form {
+    border-collapse: collapse; 
+
+}
+
+  
