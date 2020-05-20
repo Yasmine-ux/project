@@ -1,20 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const Service = require("../models/services_models");
+const Category = require("../models/categories_models");
 
-router.post("/add_service", (req, res) => {
-  const { title, category, description, id_serviceProvider } = req.body;
-  const newService = new Service({
+router.post("/add_category", (req, res) => {
+  const { title, photo_URL } = req.body;
+  const newCategory = new Category({
     title,
-    category,
-    description,
-    id_serviceProvider,
-    id_client: null
+    photo_URL,
   });
-  newService
+  newCategory
     .save()
-    .then((data) => res.json({ service: data }))
+    .then((data) => res.json({ category: data }))
     .catch((err) =>
       res.json({
         error: { code: -1, message: "failed to connect/access to database" },
@@ -22,9 +19,9 @@ router.post("/add_service", (req, res) => {
     );
 });
 
-router.get("/services", (req, res) => {
-  Service.find()
-    .then((data) => res.json({ services: data }))
+router.get("/categories", (req, res) => {
+  Category.find()
+    .then((data) => res.json({ categories: data }))
     .catch((err) =>
       res.json({
         error: { code: -1, message: "failed to connect/access to database" },
@@ -32,17 +29,17 @@ router.get("/services", (req, res) => {
     );
 });
 
-router.get("/service/:id", (req, res) => {
+router.get("/category/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOne({ _id: id })
+  Category.findOne({ _id: id })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -2, message: "failed to find service" },
+          error: { code: -2, message: "failed to find category" },
         });
       } else {
         res.json({
-          result: { service: data },
+          result: { category: data },
         });
       }
     })
@@ -53,17 +50,17 @@ router.get("/service/:id", (req, res) => {
     );
 });
 
-router.delete("/remove_service/:id", (req, res) => {
+router.delete("/remove_category/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOneAndDelete({ _id: id })
+  Category.findOneAndDelete({ _id: id })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -3, message: "failed to delete service" },
+          error: { code: -3, message: "failed to delete category" },
         });
       } else {
         res.json({
-          result: { message: "service deleted successfully" },
+          result: { message: "category deleted successfully" },
         });
       }
     })
@@ -74,20 +71,17 @@ router.delete("/remove_service/:id", (req, res) => {
     );
 });
 
-router.put("/update_service/:id", (req, res) => {
+router.put("/update_category/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOneAndUpdate(
-    { _id: id },
-    { $set: req.body }
-  )
+  Category.findOneAndUpdate({ _id: id }, { $set: req.body })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -4, message: "failed to update service" },
+          error: { code: -4, message: "failed to update category" },
         });
       } else {
         res.json({
-          result: { message: "service updated successfully" },
+          result: { message: "category updated successfully" },
         });
       }
     })

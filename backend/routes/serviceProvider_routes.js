@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const Service = require("../models/services_models");
+const ServiceProvider = require("../models/serviceProvider_models");
 
-router.post("/add_service", (req, res) => {
-  const { title, category, description, id_serviceProvider } = req.body;
-  const newService = new Service({
-    title,
-    category,
-    description,
-    id_serviceProvider,
-    id_client: null
+router.post("/add_serviceProvider", (req, res) => {
+  const { first_name, last_name, phone_number, email, service } = req.body;
+  const newServiceProvider = new ServiceProvider({
+    first_name,
+    last_name,
+    phone_number,
+    email,
+    service
   });
-  newService
+  newServiceProvider
     .save()
-    .then((data) => res.json({ service: data }))
+    .then((data) => res.json({ serviceProvider: data }))
     .catch((err) =>
       res.json({
         error: { code: -1, message: "failed to connect/access to database" },
@@ -22,9 +22,9 @@ router.post("/add_service", (req, res) => {
     );
 });
 
-router.get("/services", (req, res) => {
-  Service.find()
-    .then((data) => res.json({ services: data }))
+router.get("/serviceProvider", (req, res) => {
+  ServiceProvider.find()
+    .then((data) => res.json({ serviceProvider: data }))
     .catch((err) =>
       res.json({
         error: { code: -1, message: "failed to connect/access to database" },
@@ -32,17 +32,17 @@ router.get("/services", (req, res) => {
     );
 });
 
-router.get("/service/:id", (req, res) => {
+router.get("/serviceProvider/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOne({ _id: id })
+  ServiceProvider.findOne({ _id: id })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -2, message: "failed to find service" },
+          error: { code: -2, message: "failed to find serviceProvider" },
         });
       } else {
         res.json({
-          result: { service: data },
+          result: { serviceProvider: data },
         });
       }
     })
@@ -53,17 +53,17 @@ router.get("/service/:id", (req, res) => {
     );
 });
 
-router.delete("/remove_service/:id", (req, res) => {
+router.delete("/remove_serviceProvider/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOneAndDelete({ _id: id })
+  ServiceProvider.findOneAndDelete({ _id: id })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -3, message: "failed to delete service" },
+          error: { code: -3, message: "failed to delete serviceProvider" },
         });
       } else {
         res.json({
-          result: { message: "service deleted successfully" },
+          result: { message: "serviceProvider deleted successfully" },
         });
       }
     })
@@ -74,20 +74,17 @@ router.delete("/remove_service/:id", (req, res) => {
     );
 });
 
-router.put("/update_service/:id", (req, res) => {
+router.put("/update_serviceProvider/:id", (req, res) => {
   const { id } = req.params;
-  Service.findOneAndUpdate(
-    { _id: id },
-    { $set: req.body }
-  )
+  ServiceProvider.findOneAndUpdate({ _id: id }, { $set: req.body })
     .then((data) => {
       if (data == null) {
         res.json({
-          error: { code: -4, message: "failed to update service" },
+          error: { code: -4, message: "failed to update serviceProvider" },
         });
       } else {
         res.json({
-          result: { message: "service updated successfully" },
+          result: { message: "serviceProvider updated successfully" },
         });
       }
     })
