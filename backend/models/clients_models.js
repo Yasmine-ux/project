@@ -3,6 +3,8 @@ const schema = mongoose.Schema;
 
 const ClientSchema = new schema(
   {
+    username: { type: String },
+    password: { type: String },
     first_name: { type: String },
     last_name: { type: String },
     phone_number: { type: Number },
