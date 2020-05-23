@@ -7,7 +7,7 @@ import './style.css'
             <div className='container'>
                 <div className='row'>
                     <div className='col-md-3 col-sm-6' >
-                        <h4>HOMIES</h4>
+                        <h4 className='footer-title'>HOMIES</h4>
                         <ul className='list-unstyled'>
                             <li>Home</li>
                             <li>Service Provider account</li>
@@ -16,7 +16,7 @@ import './style.css'
                         </ul>
                     </div>
                     <div className='col-md-3 col-sm-6' >
-                        <h4>Our famous services</h4>
+                        <h4 className='footer-title'>Our famous services</h4>
                         <ul className='list-unstyled'>
                             <li>Baby-sitting</li>
                             <li>Gardening</li>
@@ -26,7 +26,7 @@ import './style.css'
                     </div>
                 </div>
                 <div className='footer-bottom rights'>
-                    <p className='text-xs-center'>
+                    <p className='text-xs-center right'>
                         &copy;{new Date().getFullYear()} Homies Web Site. All Rights Reserved
                     </p>
                 </div>

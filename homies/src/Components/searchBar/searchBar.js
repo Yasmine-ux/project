@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import './style.css';
+import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
-
-export default class SearchBar extends Component {
+ class SearchBar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -27,18 +27,18 @@ export default class SearchBar extends Component {
          <Carousel className='Carousel'>
   <Carousel.Item>
     <img
-      className="d-block w-100 carouselimg"
+      className="carousel carouselimg"
       src={require("../searchBar/handyman.jpg")}
       alt="First slide"
     />
     <Carousel.Caption>
     <form onSubmit={e => e.preventDefault()}>
-          <input className="form__field"
+          {/* <input className="form__field"
             type='text'
             size='45'
             placeholder='Service Type'
             onChange={this.handleSearch.bind(this)}
-            value={this.state.username} />
+            value={this.state.username} /> */}
             <input className="form__field"
             type='text'
             size='45'
@@ -57,19 +57,19 @@ export default class SearchBar extends Component {
   </Carousel.Item>
   <Carousel.Item>
     <img
-      className="d-block w-100 carouselimg"
-      src={require("../searchBar/garden.jpg")}
+      className="carousel carouselimg"
+      src={require("../searchBar/garden.jpeg")}
       alt="Third slide"
     />
 
     <Carousel.Caption>
     <form onSubmit={e => e.preventDefault()}>
-          <input className="form__field"
+          {/* <input className="form__field"
             type='text'
             size='45'
             placeholder='Service Type'
             onChange={this.handleSearch.bind(this)}
-            value={this.state.username} />
+            value={this.state.username} /> */}
             <input className="form__field"
             type='text'
             size='45'
@@ -88,25 +88,26 @@ export default class SearchBar extends Component {
   </Carousel.Item>
   <Carousel.Item>
     <img
-      className="d-block w-100 carouselimg"
+      className="carousel carouselimg"
       src={require("../searchBar/beauty.jpg")}
       alt="Third slide"
     />
 
     <Carousel.Caption>
     <form onSubmit={e => e.preventDefault()}>
-          <input className="form__field"
+          {/* <input className="form__field"
             type='text'
             size='45'
             placeholder='Service Type'
             onChange={this.handleSearch.bind(this)}
-            value={this.state.username} />
+            value={this.state.username} /> */}
             <input className="form__field"
             type='text'
             size='45'
             placeholder='Service name'
             onChange={this.handleSearch.bind(this)}
-            value={this.state.username} />
+            value={this.state.username}
+             />
           <button
             type='submit'
             onClick={this.handleGoClick.bind(this)}>
@@ -123,3 +124,5 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+export default SearchBar

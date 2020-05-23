@@ -19,5 +19,13 @@ form {
     border-collapse: collapse; 
 
 }
+.searchbar-container {
+    padding-top: 80px ;
+}
+.carousel {
+    height: 710px;
+    margin-top: -80px;
+    width: 1349px;
+}
 
   

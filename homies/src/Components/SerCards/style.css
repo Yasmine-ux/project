@@ -1,0 +1,24 @@
+.service-card-btn{
+    width: 200px;
+}
+.service-Card {
+    height: 450px;
+}
+.Card-img {
+   border: none;
+}
+.cartes {
+    display: flex;
+}
+.SerCard {
+    margin:20px;
+    padding:40px;
+}
+.Titre-service {
+    padding: 20px;
+    padding-top: 20px;
+    /* font-size: large;
+    font-weight: 400; */
+    background-color: whitesmoke;
+    color: rgb(92, 91, 91);
+}
