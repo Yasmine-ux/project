@@ -13,14 +13,16 @@
 .Title {
     color: #555;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 15px;
 
 }
 .Text {
     display: flex;
     align-items: center;
-    width: 200px;
+    width: 300px;
     color: rgb(155, 152, 152);
     font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-left: 20px;
     
 }
  .image{
@@ -29,5 +31,5 @@
      border-radius: 100px;
      border-color: #fffd47;
      border-width: 2px;
-    box-shadow: 5px 2px 5px #2c3792; 
+    box-shadow: 1px 1px 2px #2c3792; 
 }

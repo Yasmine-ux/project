@@ -10,3 +10,12 @@
 .row {
     padding-top: 30px;
 }
+.footer-title{
+    /* color: #2c3792; */
+    font-family: serif;
+    border-bottom: yellow;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    
+
+}
