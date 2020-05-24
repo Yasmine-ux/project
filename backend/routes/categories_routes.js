@@ -1,20 +1,18 @@
 const express = require("express");
 const router = express.Router();
-
 const objectId = require("mongoose").Types.ObjectId;
-
 const Category = require("../models/categories_models");
 
 router.post("/add", (req, res) => {
-  const { title, photo_URL } = req.body;
-  if (title == null || photo_URL == null) {
+  const { title: v_title, photo_URL: v_photo_URL } = req.body;
+  if (v_title == null || v_photo_URL == null) {
     res.json({
       error: { code: -5, message: "one or multiple arguments are missing" },
     });
   } else {
     const newCategory = new Category({
-      title,
-      photo_URL,
+      title: v_title,
+      photo_URL: v_photo_URL,
     });
     newCategory
       .save()
@@ -38,13 +36,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/getOne/:id", (req, res) => {
-  const { id } = req.params;
-  if (objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-    Category.findOne({ _id: id })
+    Category.findOne({ _id: v_id })
       .then((data) => {
         if (data == null) {
           res.json({
@@ -65,13 +63,13 @@ router.get("/getOne/:id", (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-  const { id } = req.params;
-  if ( objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if ( objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-  Category.findOneAndDelete({ _id: id })
+  Category.findOneAndDelete({ _id: v_id })
     .then((data) => {
       if (data == null) {
         res.json({
@@ -92,13 +90,13 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.put("/update/:id", (req, res) => {
-  const { id } = req.params;
-  if ( objectId.isValid(id) == false ) {
+  const { id: v_id } = req.params;
+  if ( objectId.isValid(v_id) == false ) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-  Category.findOneAndUpdate({ _id: id }, { $set: req.body })
+  Category.findOneAndUpdate({ _id: v_id }, { $set: req.body })
     .then((data) => {
       if (data == null) {
         res.json({

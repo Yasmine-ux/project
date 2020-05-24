@@ -1,26 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const objectId = require("mongoose").Types.ObjectId;
-
 const Service = require("../models/services_models");
 
 router.post("/add", (req, res) => {
-  const { title, description, id_category, id_serviceProvider } = req.body;
+  const { 
+    title: v_title, 
+    description: v_description, 
+    id_category: v_id_category, 
+    id_serviceProvider: v_id_serviceProvider 
+  } = req.body;
   if (
-    title == null ||
-    description == null ||
-    id_category == null ||
-    id_serviceProvider == null
+    v_title == null ||
+    v_description == null ||
+    v_id_category == null ||
+    v_id_serviceProvider == null
   ) {
     res.json({
       error: { code: -5, message: "one or multiple arguments are missing" },
     });
   } else {
     const newService = new Service.ServiceCollection({
-      title,
-      description,
-      id_category,
-      id_serviceProvider,
+      title: v_title, 
+      description: v_description, 
+      id_category: v_id_category, 
+      id_serviceProvider: v_id_serviceProvider,
       id_client: null,
       status: false,
     });
@@ -46,13 +50,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/getOne/:id", (req, res) => {
-  const { id } = req.params;
-  if (objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-    Service.ServiceCollection.findOne({ _id: id })
+    Service.ServiceCollection.findOne({ _id: v_id })
       .then((serviceData) => {
         if (serviceData == null) {
           res.json({
@@ -119,9 +123,7 @@ router.get("/getOne/:id", (req, res) => {
               result.status = serviceData.status
               res.json({
                 result: {
-                  data: {
-                    result
-                  }
+                  data: result
                 },
               });
             }
@@ -137,13 +139,13 @@ router.get("/getOne/:id", (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-  const { id } = req.params;
-  if (objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-    Service.ServiceCollection.findOneAndDelete({ _id: id })
+    Service.ServiceCollection.findOneAndDelete({ _id: v_id })
       .then((data) => {
         if (data == null) {
           res.json({
@@ -164,18 +166,18 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.put("/request/:id_client/:id_service", (req, res) => {
-  const { id_client, id_service } = req.params;
+  const { id_client: v_id_client, id_service: v_id_service } = req.params;
   if (
-    objectId.isValid(id_client) == false ||
-    objectId.isValid(id_service) == false
+    objectId.isValid(v_id_client) == false ||
+    objectId.isValid(v_id_service) == false
   ) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
     Service.ServiceCollection.findOneAndUpdate(
-      { _id: id_service },
-      { $set: { id_client: id_client } }
+      { _id: v_id_service },
+      { $set: { id_client: v_id_client } }
     )
       .then((data) => {
         if (data == null) {
@@ -197,22 +199,22 @@ router.put("/request/:id_client/:id_service", (req, res) => {
 });
 
 router.put("/response/:id_service/:status", (req, res) => {
-  var { status, id_service } = req.params;
-  if (objectId.isValid(id_service) == false || typeof status === "boolean") {
+  var { status: v_status, id_service: v_id_service } = req.params;
+  if (objectId.isValid(v_id_service) == false || typeof v_status === "boolean") {
     res.json({
       error: { code: -6, message: "check input" },
     });
   } else {
     var update = {};
-    status = JSON.parse(status);
-    if (status) {
+    v_status = JSON.parse(v_status);
+    if (v_status) {
       update.status = true;
     } else {
       update.id_client = null;
       update.status = false;
     }
     Service.ServiceCollection.findOneAndUpdate(
-      { _id: id_service },
+      { _id: v_id_service },
       { $set: update }
     )
       .then((data) => {

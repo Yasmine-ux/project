@@ -6,38 +6,38 @@ const ServiceProvider = require("../models/serviceProvider_models");
 
 router.post("/register", (req, res) => {
   var {
-    username,
-    password,
-    first_name,
-    last_name,
-    phone_number,
-    email,
+    username: v_username,
+    password: v_password,
+    first_name: v_first_name,
+    last_name: v_last_name,
+    phone_number: v_phone_number,
+    email: v_email,
   } = req.body;
   if (
-    username == null ||
-    password == null ||
-    first_name == null ||
-    last_name == null ||
-    phone_number == null ||
-    email == null
+    v_username == null ||
+    v_password == null ||
+    v_first_name == null ||
+    v_last_name == null ||
+    v_phone_number == null ||
+    v_email == null
   ) {
     res.json({
       error: { code: -5, message: "one or multiple arguments are missing" },
     });
   } else {
     var salt = 8;
-    bcrypt.hash(password, salt, (err, encrypted) => {
+    bcrypt.hash(v_password, salt, (err, encrypted) => {
       if (err) {
         res.json({ error: { code: -6, message: "failed to hash password" } });
       } else {
-        password = encrypted;
+        v_password = encrypted;
         const newServiceProvider = new ServiceProvider({
-          username,
-          password,
-          first_name,
-          last_name,
-          phone_number,
-          email,
+          username: v_username,
+          password: v_password,
+          first_name: v_first_name,
+          last_name: v_last_name,
+          phone_number: v_phone_number,
+          email: v_email,
         });
         newServiceProvider
           .save()
@@ -66,14 +66,14 @@ router.get("/", (req, res) => {
 });
 
 router.get("/authenticate/:username/:password", (req, res) => {
-  const { username, password } = req.params;
-  if (username == null || password == null) {
+  const { username: v_username, password: v_password } = req.params;
+  if (v_username == null || v_password == null) {
     res.json({
       error: { code: -5, message: "one or multiple arguments are missing" },
     });
   } else {
     ServiceProvider.findOne(
-      { username: username },
+      { username: v_username },
       { first_name: 1, last_name: 1, password: 1 }
     )
       .then((data) => {
@@ -82,7 +82,7 @@ router.get("/authenticate/:username/:password", (req, res) => {
             error: { code: -2, message: "authentication failed" },
           });
         } else {
-          bcrypt.compare(password, data.password, function (err, result) {
+          bcrypt.compare(v_password, data.password, function (err, result) {
             if (result == true) {
               res.json({
                 result: {
@@ -110,13 +110,13 @@ router.get("/authenticate/:username/:password", (req, res) => {
 });
 
 router.delete("/delete/:id", (req, res) => {
-  const { id } = req.params;
-  if (objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-    ServiceProvider.findOneAndDelete({ _id: id })
+    ServiceProvider.findOneAndDelete({ _id: v_id })
       .then((data) => {
         if (data == null) {
           res.json({
@@ -137,17 +137,55 @@ router.delete("/delete/:id", (req, res) => {
 });
 
 router.put("/update/:id", (req, res) => {
-  const { id } = req.params;
-  if (objectId.isValid(id) == false) {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
     res.json({
       error: { code: -6, message: "check id input" },
     });
   } else {
-    ServiceProvider.findOneAndUpdate({ _id: id }, { $set: req.body })
+    var newData = {};
+    newData = req.body;
+    if (newData.password) {
+      var salt = 8;
+      bcrypt.hash(newData.password, salt, (err, encrypted) => {
+        if (err) {
+          res.json({ error: { code: -6, message: "failed to hash password" } });
+        } else {
+          newData.password = encrypted;
+          ServiceProvider.findOneAndUpdate({ _id: v_id }, { $set: req.body })
+            .then((data) => {
+              if (data == null) {
+                res.json({
+                  error: {
+                    code: -4,
+                    message: "failed to update serviceProvider",
+                  },
+                });
+              } else {
+                res.json({
+                  result: { message: "serviceProvider updated successfully" },
+                });
+              }
+            })
+            .catch((err) =>
+              res.json({
+                error: {
+                  code: -1,
+                  message: "failed to connect/access to database",
+                },
+              })
+            );
+        }
+      });
+    }
+    ServiceProvider.findOneAndUpdate({ _id: v_id }, { $set: req.body })
       .then((data) => {
         if (data == null) {
           res.json({
-            error: { code: -4, message: "failed to update serviceProvider" },
+            error: {
+              code: -4,
+              message: "failed to update serviceProvider",
+            },
           });
         } else {
           res.json({
@@ -157,7 +195,10 @@ router.put("/update/:id", (req, res) => {
       })
       .catch((err) =>
         res.json({
-          error: { code: -1, message: "failed to connect/access to database" },
+          error: {
+            code: -1,
+            message: "failed to connect/access to database",
+          },
         })
       );
   }

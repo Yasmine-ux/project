@@ -7,9 +7,9 @@ const ServiceSchema = new schema(
     title: { type: String },
     description: { type: String },
     status: { type: Boolean },
-    id_category: { type: objectId },
+    id_category: { type: objectId, ref: "Category" },
     id_serviceProvider: { type: objectId, ref: "ServiceProvider" },
-    id_client: { type: objectId },
+    id_client: { type: objectId, ref:"Client" },
   },
   { versionKey: false }
 );
