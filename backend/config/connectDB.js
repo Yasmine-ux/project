@@ -6,6 +6,7 @@ const connectDB = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
+      useCreateIndex: true
     })
     .then(() => console.log("mongoose connected"))
     .catch((err) => console.log("erreur"));
