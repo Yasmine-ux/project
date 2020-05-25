@@ -5,12 +5,18 @@ const objectId = mongoose.Types.ObjectId;
 const ServiceSchema = new schema(
   {
     title: { type: String },
-    category: { type: String },
     description: { type: String },
-    id_serviceProvider: { type: objectId },
-    id_client: { type: objectId }
+    status: { type: Boolean },
+    id_category: { type: objectId, ref: "Category" },
+    id_serviceProvider: { type: objectId, ref: "ServiceProvider" },
+    id_client: { type: objectId, ref:"Client" },
   },
   { versionKey: false }
 );
 
-module.exports = Service = mongoose.model("Service", ServiceSchema);
+module.exports = {
+  ServiceProviderCollection: require("./serviceProvider_models"),
+  clientCollection: require("./clients_models"),
+  categoriesCollection: require("./categories_models"),
+  ServiceCollection: mongoose.model("Service", ServiceSchema),
+};
