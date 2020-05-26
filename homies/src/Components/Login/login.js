@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.scss";
+// import "./Login.scss";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
 import { connect } from 'react-redux'
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://images7.alphacoders.com/950/thumb-1920-950815.png)',
+    backgroundImage: 'url(https://www.amonservice.com/wp-content/uploads/2017/09/Main-Banner.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
         // props.displayCurrentUser(res.data.token)
       })
       .catch(err => {
-        setMsg("** Please verify your login & password !!!");
+        // setMsg("** Please verify your login & password !!!");
         setPassword("");
       });
   };
@@ -94,12 +94,12 @@ const useStyles = makeStyles((theme) => ({
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar >
+          {/* <Avatar >
             <img src={logo} width="100px" />
            
-          </Avatar>
+          </Avatar> */}
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign In
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -144,20 +144,20 @@ const useStyles = makeStyles((theme) => ({
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
+            {/* <Box mt={5}>
              <div class="msg">{Msg} </div> 
-            </Box>
+            </Box> */}
           </form>
         </div>
       </Grid>

@@ -1,0 +1,21 @@
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 10px 70px 80px;
+}
+.select-form {
+    width: 50%;
+    margin: 10px 70px 5px;
+
+}
+.hello-provider{
+    margin: 30px 70px 5px;
+    color: #2c3792;
+    font-style: italic;
+}
+.edit , .booked {
+    margin: 30px 70px 5px;
+    font-style: italic;
+    font-size: large;
+}

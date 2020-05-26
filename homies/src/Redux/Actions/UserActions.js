@@ -4,3 +4,9 @@ export const signIn = (userId) => {
         payload: userId
     };
 };
+
+export const signOut = () => {
+    return {
+        type: "SIGN_OUT"
+    };
+};
