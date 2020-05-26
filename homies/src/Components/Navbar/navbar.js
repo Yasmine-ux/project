@@ -30,34 +30,45 @@ const Navmenu = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar >
             <NavItem>
-              <NavLink href="/components/"  style={{color:'#2c3792'}} className='navmenu'>Home</NavLink>
+              <NavLink href="/home"  style={{color:'#2c3792'}} className='navmenu'>Home</NavLink>
             </NavItem>
+            
             <UncontrolledDropdown  nav inNavbar>
               <DropdownToggle nav style={{color:'#2c3792'}} className='navmenu'>
                 Our Services
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
+                <DropdownItem href='plumbing'>
                   Plumbing and Painting 
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem href='gardenoutdoor'>
                   Garden and Outdoor
                 </DropdownItem>
-                <DropdownItem>
-                  Home help
+                <DropdownItem href='homehelp'>
+                  Home Help
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem href='healthbeauty'>
                   Health and Beauty
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
           <NavItem style={{listStyle: 'none'}} nav className='login'>
-            <NavLink>Login</NavLink>
+            <NavLink href='/login'>Login</NavLink>
             </NavItem>
-          <NavItem  style={{listStyle: 'none'}} className='login' nav>
-            <NavLink>Sign up</NavLink> 
-            </NavItem>
+              <UncontrolledDropdown  nav inNavbar>
+              <DropdownToggle nav style={{color:'#2c3792'}} className='navmenu'>
+                Sing up
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem href='register'>
+                  Client 
+                </DropdownItem>
+                <DropdownItem href='registerserver'>
+                  Service Provider
+                </DropdownItem>
+                </DropdownMenu>
+                </UncontrolledDropdown>
         </Collapse>
       </Navbar>
       
