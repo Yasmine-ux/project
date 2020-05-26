@@ -165,6 +165,33 @@ router.delete("/delete/:id", (req, res) => {
   }
 });
 
+router.put("/update/:id", (req, res) => {
+  const { id: v_id } = req.params;
+  if (objectId.isValid(v_id) == false) {
+    res.json({
+      error: { code: -6, message: "check id input" },
+    });
+  } else {
+    Service.ServiceCollection.findOneAndUpdate({ _id: v_id }, { $set: req.body })
+      .then((data) => {
+        if (data == null) {
+          res.json({
+            error: { code: -3, message: "failed to update service" },
+          });
+        } else {
+          res.json({
+            result: { message: "service updated successfully" },
+          });
+        }
+      })
+      .catch((err) =>
+        res.json({
+          error: { code: -1, message: "failed to connect/access to database" },
+        })
+      );
+  }
+});
+
 router.put("/request/:id_client/:id_service", (req, res) => {
   const { id_client: v_id_client, id_service: v_id_service } = req.params;
   if (
