@@ -66,14 +66,14 @@ const useStyles = makeStyles((theme) => ({
 
  function Login2(props) {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 //   const [Msg, setMsg] = useState("");
 
   const loginUser = () => {
 
     Axios
-      .post("http://localhost:5000/authenticate/:username/:password", { email,password })
+      .post("http://localhost:5000/clients/authenticate/:username/:password", { username,password })
       .then(res => {
         localStorage.setItem("token", res.data.token);
         
@@ -107,13 +107,13 @@ const useStyles = makeStyles((theme) => ({
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
+              id="username"
+              label="username"
+              name="username"
               autoComplete="email"
               autoFocus
               onChange={(e) =>
-                setEmail(e.target.value)
+                setUsername(e.target.value)
               }
             
             />

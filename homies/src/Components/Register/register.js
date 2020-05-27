@@ -50,34 +50,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Register2(props) {
+ function RegisterServer(props) {
   const classes = useStyles();
    const [exist, setExist] = useState("")
     const [user, setUser] = useState({
         username: "",
         email: "",
         password: "",
+        confirmPassword: "",
         FirstName: "",
         LastName: "",
-        // createdAt: Date.now(),
+        createdAt: Date.now(),
         phoneNumber: "",
-        adress:'',
+        
 
     });
-    const add = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:5000/register", user).then(response => {
+    const add = () => {
+        // e.preventDefault();
+        axios.post("http://localhost:5000/clients/register", user).then(response => {
             console.log("the status is:", response.status);
-            if (response.status === 200) {
+            // if (response.status === 200) {
                 props.history.push("/login");
                
-            };
+            // };
         }).catch(err => {
             setExist("user already exist , try another email  !")
             setUser({
                 ...user,
                 password: "",
                 email: "",
+                confirmPassword: ""
             })
         });;
 
@@ -94,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
         </Avatar> */}
         <Typography component="h1" variant="h5">
        
-          Sign up
+          Sign up as a Service Provider
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -182,27 +184,7 @@ const useStyles = makeStyles((theme) => ({
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={12}>
-              <TextField
-                autoComplete="Adress"
-                name="Adress"
-                variant="outlined"
-                required
-                fullWidth
-                id="Adress"
-                label="Adress"
-                autoFocus
-                value={
-                    user.adress
-                }
-                onChange={
-                    (e) => setUser({
-                        ...user,
-                        adress: e.target.value
-                    })
-                }
-              />
-            </Grid>
+            
         
             <Grid item xs={12}>
               <TextField
@@ -245,7 +227,7 @@ const useStyles = makeStyles((theme) => ({
                 }
               />
             </Grid>
-            {/* <Grid item xs={6}>
+            <Grid item xs={6}>
               <TextField
                 variant="outlined"
                 required
@@ -265,7 +247,7 @@ const useStyles = makeStyles((theme) => ({
                     })
                 }
               />
-            </Grid> */}
+            </Grid>
         
           </Grid>
           <Button
@@ -293,4 +275,4 @@ const useStyles = makeStyles((theme) => ({
     </div>
   );
 }
-export default withRouter(Register2);
+export default withRouter(RegisterServer);
