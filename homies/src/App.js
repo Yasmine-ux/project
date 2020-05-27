@@ -13,18 +13,20 @@ import Login2 from './Components/Login/login';
 import Register2 from './Components/Register/register'
 import RegisterServer from './Components/Register/registerserver';
 import HomeHelp from './Components/Home/HomeHelp';
-import ControlledOpenSelect from './Components/Dashboard/selects';
+// import ControlledOpenSelect from './Components/Dashboard/selects';
 import Dashboard from './Components/Dashboard/dashboard'
+import servicesPage from './Components/Allservices/servicesPage'
 
 function App() {
   return (
     <div>
+      {/* <servicesPage/> */}
       
     <Router>
          <Navmenu/>
 
               <Switch>
-                  <Route exact path='/dashboard' component={Dashboard}/>
+                  {/* <Route exact path='/dashboard' component={Dashboard}/> */}
                   <Route exact path='/registerserver' component={RegisterServer}/>
                   <Route exact path='/register' component={Register2} />
                   <Route exact path='/home' component={HomePage} />
@@ -41,5 +43,40 @@ function App() {
 }
 
 export default App;
+
+// import React from "react";
+// import { Route, Switch, BrowserRouter } from "react-router-dom";
+// import Login from "./Components/Login/signin";
+// import Add from "./Components/Register/sihnup";
+// import Home from "./Components/Dashboard/dash";
+// import NavbarM from "./Components/Navbar/navbar";
+// // import ToDo from "./components/Todo";
+
+// export default function App() {
+//   return (
+//     <div>
+//       <BrowserRouter>
+//         <Switch>
+//           <Route exact path="/">
+//             <NavbarM />
+//           </Route>
+//           <Route exact path="/signin">
+//             <NavbarM />
+//             <Login />
+//           </Route>
+//           <Route exact path="/signup">
+//             <NavbarM />
+//             <Add />
+//           </Route>
+//           <Route exact path="/dashboard">
+//             <NavbarM />
+//             <Home />
+//             {/* <ToDo /> */}
+//           </Route>
+//         </Switch>
+//       </BrowserRouter>
+//     </div>
+//   );
+// }
    
 
