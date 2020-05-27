@@ -2,8 +2,6 @@ import React, { useState } from "react";
 // import "./Login.scss";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
-import { connect } from 'react-redux'
-import { signIn } from '../../Redux/Actions/UserActions'
 import jwt_decode from "jwt-decode";
 
 import Avatar from '@material-ui/core/Avatar';
@@ -165,4 +163,4 @@ const useStyles = makeStyles((theme) => ({
   );
 }
 
-export default  withRouter(connect(null, { signIn }) (Login2 )  );
+export default  withRouter( Login2 );

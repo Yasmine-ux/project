@@ -1,21 +1,8 @@
-.formulaire {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 10px 70px 80px;
-}
-.select-form {
-    width: 50%;
-    margin: 10px 70px 5px;
-
-}
-.hello-provider{
-    margin: 30px 70px 5px;
-    color: #2c3792;
+.dashboard-phrase {
+    font-size: x-large;
     font-style: italic;
+    margin: 60px 60px 20px;
 }
-.edit , .booked {
-    margin: 30px 70px 5px;
-    font-style: italic;
-    font-size: large;
+.service-section {
+    margin: 60px 60px 20px;
 }
