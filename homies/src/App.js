@@ -15,18 +15,18 @@ import RegisterServer from './Components/Register/registerserver';
 import HomeHelp from './Components/Home/HomeHelp';
 // import ControlledOpenSelect from './Components/Dashboard/selects';
 import Dashboard from './Components/Dashboard/dashboard'
-import servicesPage from './Components/Allservices/servicesPage'
 
 function App() {
   return (
     <div>
-      {/* <servicesPage/> */}
+      
       
     <Router>
          <Navmenu/>
 
               <Switch>
-                  {/* <Route exact path='/dashboard' component={Dashboard}/> */}
+                  <Route exact path='/dashboard' component={Dashboard}/>
+                  {/* <Route exact path='/' component={servicesPage}/> */}
                   <Route exact path='/registerserver' component={RegisterServer}/>
                   <Route exact path='/register' component={Register2} />
                   <Route exact path='/home' component={HomePage} />
