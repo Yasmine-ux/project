@@ -15,6 +15,7 @@ import RegisterServer from './Components/Register/registerserver';
 import HomeHelp from './Components/Home/HomeHelp';
 // import ControlledOpenSelect from './Components/Dashboard/selects';
 import Dashboard from './Components/Dashboard/dashboard'
+import AddService from './Components/Dashboard/addModal';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
          <Navmenu/>
 
               <Switch>
-                  <Route exact path='/dashboard' component={Dashboard}/>
+                  <Route exact path='/services' component={Dashboard}/>
+                  <Route exact path='/services/add' component={AddService}/>
                   {/* <Route exact path='/' component={servicesPage}/> */}
                   <Route exact path='/registerserver' component={RegisterServer}/>
                   <Route exact path='/register' component={Register2} />
