@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const objectId = require("mongoose").Types.ObjectId;
 const Client = require("../models/clients_models");
+const jwt = require("jsonwebtoken");
+const passport = require('passport')
 
 router.post("/register", (req, res) => {
   var {
@@ -57,6 +59,44 @@ router.post("/register", (req, res) => {
     });
   }
 });
+
+router.post("/loginn", (req, res) => {
+  const { email, password } = req.body;
+  Client.findOne({ email })
+    .then((user) => {
+      if (!user) res.sendStatus(404);
+      else {
+        bcrypt
+          .compare(password, user.password)
+          .then((isMatched) => {
+            if (isMatched) {
+              const payload = { id: user._id, email: user.email };
+              jwt.sign(
+                payload,
+                "session",
+                { expiresIn: 3600 },
+                (err, token) => {
+                  if (err) res.sendStatus(500);
+                  else res.json({ token: token });
+                }
+              );
+            } else {
+              res.sendStatus(400);
+            }
+          })
+          .catch((err) => console.error(err));
+      }
+    })
+    .catch((err) => console.log("Server Error"));
+});
+
+router.get(
+  "/validate",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
 
 router.get("/", (req, res) => {
   Client.find()

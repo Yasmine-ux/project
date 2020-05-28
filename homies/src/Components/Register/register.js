@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
         // e.preventDefault();
         axios.post("http://localhost:5000/clients/register", user).then(response => {
             console.log("the status is:", response.status);
-            // if (response.status === 200) {
+            if (response.status === 200) {
                 props.history.push("/login");
                
-            // };
+            };
         }).catch(err => {
             setExist("user already exist , try another email  !")
             setUser({
